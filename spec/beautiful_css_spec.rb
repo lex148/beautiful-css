@@ -3,7 +3,7 @@ require 'helper'
 describe BeautifulCss::Css do
 
   before do
-    @subject = BeautifulCss::Css.new
+    @subject = BeautifulCss::Css.new ''
   end
 
   it 'should be a class' do
