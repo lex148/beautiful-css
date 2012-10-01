@@ -5,3 +5,7 @@ gemspec
 gem 'rake'
 gem 'sass'
 
+group :test, :development do
+  gem 'minitest'
+end
+
