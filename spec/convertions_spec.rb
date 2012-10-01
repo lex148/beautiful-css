@@ -81,6 +81,23 @@ CLEAN
 
 
 
+  it 'should remove dups' do
+    dirty = <<DIRTY
+a { color:red }
+a { color:red }
+DIRTY
+    clean = <<CLEAN
+a
+{ color:red }
+CLEAN
+    assert_renders dirty, clean
+  end
+
+
+
+
+
+
 
 
   def assert_renders(dirty,clean)

@@ -24,8 +24,7 @@ module BeautifulCss
       text = text.gsub( / +/m, " " )
       text = text.gsub( /\/\*[^*]*\*\//m, " " )
       rules = text.split('}')
-
-      rules = rules.map{|r| Rule.new(r) }
+      rules = rules.map{|r| Rule.new(r) }.reverse
 
       hash = {}
 
@@ -41,7 +40,7 @@ module BeautifulCss
       output = ""
       hash.keys.sort.each do |key|
         output += "\n"
-        output += hash[key].join(",\n") + "\n"
+        output += hash[key].uniq.join(",\n") + "\n"
         output += key + "\n"
       end
 
