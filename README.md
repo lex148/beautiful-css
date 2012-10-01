@@ -1,3 +1,5 @@
+[![Build
+Status](https://secure.travis-ci.org/lex148/beautiful-css.png)](http://travis-ci.org/lex148/beautiful-css)
 # Beautiful::Css
 
 Beautiful Css is a gem to help clean up your css. It reorders your style to
