@@ -1,9 +1,9 @@
 require 'helper'
 
-describe BeautifulCss::Css do
+describe BeautifulCss::Engine do
 
   before do
-    @subject = BeautifulCss::Css.new ''
+    @subject = BeautifulCss::Engine.new ''
   end
 
   it 'should be a class' do

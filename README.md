@@ -1,6 +1,7 @@
 # Beautiful::Css
 
-TODO: Write a gem description
+Beautiful Css is a gem to help clean up your css. It reorders your style to
+remove duplication.
 
 ## Installation
 
@@ -18,7 +19,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Beautiful Css can be used from the command line:
+
+    beautifulcss style.css
+
+Or directly from code:
+
+    styles = 'a {color:red}'
+    BeautifulCss::Engine.new(styles).render
 
 ## Contributing
 

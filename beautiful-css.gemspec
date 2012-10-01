@@ -5,7 +5,7 @@ require 'beautiful-css/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "beautiful-css"
-  gem.version       = Beautiful::Css::VERSION
+  gem.version       = BeautifulCss::VERSION
   gem.authors       = ["Lex Childs"]
   gem.email         = ["lexchilds@gmail.com"]
   gem.description   = %q{TODO: Write a gem description}
