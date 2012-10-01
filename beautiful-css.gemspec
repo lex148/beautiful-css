@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = BeautifulCss::VERSION
   gem.authors       = ["Lex Childs"]
   gem.email         = ["lexchilds@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{A tool to help cleanup css}
+  gem.summary       = %q{reworks your css to make it simple and mantainable}
+  gem.homepage      = "https://github.com/lex148/beautiful-css"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
