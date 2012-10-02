@@ -4,7 +4,7 @@ module BeautifulCss
     attr_accessor :selector, :prop, :value
 
     def initialize(selector, prop, value)
-      @selector, @prop, @value = selector.strip, prop.strip, value.strip
+      @selector, @prop, @value = selector, prop, value
     end
 
     def to_s
