@@ -51,7 +51,7 @@ module BeautifulCss
         rules[prop].keys.each do |selector|
           val = rules[prop][selector]
           prop_val = "{ #{prop}:#{val} }"
-          groups[prop_val] = [] if !( rules.has_key? prop_val)
+          groups[prop_val] = [] if !( groups.has_key? prop_val)
           groups[prop_val] << selector
         end
       end

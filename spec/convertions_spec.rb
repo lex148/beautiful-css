@@ -118,6 +118,18 @@ CLEAN
 
 
 
+  it 'should group selectors' do
+    dirty = <<DIRTY
+a { color:green }
+b { color:green }
+DIRTY
+    clean = <<CLEAN
+a,
+b
+{ color:green }
+CLEAN
+    assert_renders dirty, clean
+  end
 
 
 
