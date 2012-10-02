@@ -1,26 +1,14 @@
-
 module BeautifulCss
-
   class Rule
-    def initialize(str)
-      @body = str
+
+    attr_accessor :selector, :prop, :value
+
+    def initialize(selector, prop, value)
+      @selector, @prop, @value = selector.strip, prop.strip, value.strip
     end
 
-    def selectors
-      @body.match(/[^{]*/).to_s.split(/,/).map{|s| s.strip}.select{|s| !s.empty? }
-    end
-
-    def props
-      begin
-      p = @body.match(/\{([^}]*)/)[1].split(';').select{|s| !s.strip.empty? }
-      p.map{|s| "{ " + s.strip + " }"}
-      rescue
-        []
-      end
-    end
-
-    def body
-      @body
+    def to_s
+      @selector + "\n" + "{ #{prop}:#{value} }"
     end
 
   end

@@ -1,4 +1,4 @@
-require "beautiful-css/rule"
+require "beautiful-css/rule_parser"
 require "sass"
 
 module BeautifulCss
@@ -18,34 +18,56 @@ module BeautifulCss
 
     def render
       return nil if @input.nil?
+      rules = build_rules
+      cleaned = remove_unset rules
+      groups = build_groups(cleaned)
+      return format( groups )
+    end
 
+
+    private
+
+    def build_rules
       text = scss_to_css @input
       text = text.gsub( /[\n\r\t]/m, " " )
       text = text.gsub( / +/m, " " )
       text = text.gsub( /\/\*[^*]*\*\//m, " " )
       rules = text.split('}')
-      rules = rules.map{|r| Rule.new(r) }.reverse
+      rules = rules.map{|r| RuleParser.new(r).to_rules }.flatten
+    end
 
+    def remove_unset rules
       hash = {}
-
-      ##BUILD
       rules.each do |r|
-        r.props.each do |p|
-          hash[p] = [] if !( hash.has_key? p)
-          r.selectors.each { |s| hash[p].push s }
+        hash[r.prop] = {} if !( hash.has_key? r.prop)
+        hash[r.prop][r.selector] = r.value
+      end
+      hash
+    end
+
+    def build_groups rules
+      groups = {}
+      rules.keys.each do |prop|
+        rules[prop].keys.each do |selector|
+          val = rules[prop][selector]
+          prop_val = "{ #{prop}:#{val} }"
+          groups[prop_val] = [] if !( rules.has_key? prop_val)
+          groups[prop_val] << selector
         end
       end
+      groups
+    end
 
-      ##PRINT
-      output = ""
-      hash.keys.sort.each do |key|
+    def format groups
+      output = ''
+      groups.keys.sort.each do |key|
         output += "\n"
-        output += hash[key].uniq.join(",\n") + "\n"
+        output += groups[key].uniq.join(",\n") + "\n"
         output += key + "\n"
       end
-
       output.gsub( /: +/, ':' )
     end
+
 
   end
 end

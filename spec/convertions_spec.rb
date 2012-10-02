@@ -20,17 +20,25 @@ D
 
 
 
-  it 'two styles' do
+  it 'should work with three styles' do
     dirty = <<DIRTY
 a
 {
   color:red;
   background-color:blue;
 }
+
+.classy
+{
+  color:green;
+}
 DIRTY
     clean = <<CLEAN
 a
 { background-color:blue }
+
+.classy
+{ color:green }
 
 a
 { color:red }
@@ -94,6 +102,19 @@ CLEAN
   end
 
 
+
+
+  it 'should removed unset values' do
+    dirty = <<DIRTY
+a { color:green }
+a { color:red }
+DIRTY
+    clean = <<CLEAN
+a
+{ color:red }
+CLEAN
+    assert_renders dirty, clean
+  end
 
 
 
