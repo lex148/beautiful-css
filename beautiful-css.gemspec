@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["lexchilds@gmail.com"]
   gem.description   = %q{A tool to help cleanup css}
   gem.summary       = %q{reworks your css to make it simple and mantainable}
-  gem.homepage      = "https://github.com/lex148/beautiful-css"
+  gem.homepage      = "beautifulcss.org"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
