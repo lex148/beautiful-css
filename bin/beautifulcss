@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'beautiful-css'
+BeautifulCss::Exec::Css.new(ARGV).run
+
