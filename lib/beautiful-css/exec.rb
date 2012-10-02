@@ -3,6 +3,10 @@ module BeautifulCss
     class Css
 
       def initialize args
+        if args.length != 1
+          puts 'usage: beautifulcss [file]'
+          exit 1
+        end
         @args = args
       end
 
