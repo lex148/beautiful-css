@@ -133,6 +133,49 @@ CLEAN
 
 
 
+  it 'should work with import' do
+    dirty = <<DIRTY
+@import url("blargs.css");
+a { color:green }
+DIRTY
+    clean = <<CLEAN
+@import url("blargs.css");
+
+a
+{ color:green }
+CLEAN
+    assert_renders dirty, clean
+  end
+
+
+
+
+  it 'should work with base64 encoded images' do
+    dirty = <<DIRTY
+a
+{ background:url( data:image/png;base64,iVBORw0KGLKSsg= ); }
+DIRTY
+    clean = <<CLEAN
+a
+{ background:url(data:image/png;base64,iVBORw0KGLKSsg=) }
+CLEAN
+    assert_renders dirty, clean
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   def assert_renders(dirty,clean)
     assert_equal clean.strip, convert(dirty).strip
   end

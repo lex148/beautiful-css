@@ -18,6 +18,7 @@ module BeautifulCss
 
     def render
       return nil if @input.nil?
+      save_imports
       rules = build_rules
       cleaned = remove_unset rules
       groups = build_groups(cleaned)
@@ -27,11 +28,16 @@ module BeautifulCss
 
     private
 
+    def save_imports
+      @imports = @input.scan(/@import[^;]+;/i)
+    end
+
     def build_rules
       text = scss_to_css @input
+      text = text.gsub(/@import[^;]+;/i, '') #remove imports
       text = text.gsub( /[\n\r\t]/m, " " )
       text = text.gsub( / +/m, " " )
-      text = text.gsub( /\/\*[^*]*\*\//m, " " )
+      text = text.gsub( /\/\*[^*]*\*\//m, " " ) #remove comments
       rules = text.split('}')
       rules = rules.map{|r| RuleParser.new(r).to_rules }.flatten
     end
@@ -59,13 +65,14 @@ module BeautifulCss
     end
 
     def format groups
-      output = ''
+      output = @imports.join('\n') + "\n"
+
       groups.keys.sort.each do |key|
         output += "\n"
         output += groups[key].uniq.join(",\n") + "\n"
         output += key + "\n"
       end
-      output.gsub( /: +/, ':' )
+      output.gsub( /: +/, ':' ).strip
     end
 
 

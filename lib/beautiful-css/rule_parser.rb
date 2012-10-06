@@ -5,6 +5,8 @@ module BeautifulCss
 
     def initialize(str)
       @body = str
+      @body = @body.gsub( /url\( *data:/ , '__url_data__')
+      @body = @body.gsub( /;base64,/ , '__base64__')
     end
 
     def selectors
@@ -20,10 +22,17 @@ module BeautifulCss
       end
     end
 
+    def restore_special_strings str
+      str = str.gsub( /__url_data__/, 'url(data:')
+      str = str.gsub( /__base64__/, ';base64,')
+      str
+    end
+
     def to_rules
       selectors.map do |selector|
         props.map do |prop|
-          BeautifulCss::Rule.new(selector, prop[0], prop[1])
+          val = restore_special_strings prop[1]
+          BeautifulCss::Rule.new(selector, prop[0], val)
         end
       end.flatten
     end
