@@ -166,6 +166,22 @@ CLEAN
 
 
 
+  it 'should ignore case for style' do
+    dirty = <<DIRTY
+a
+{ background:green; }
+a
+{ BACKGROUND:green; }
+DIRTY
+    clean = <<CLEAN
+a
+{ background:green }
+CLEAN
+    assert_renders dirty, clean
+  end
+
+
+
 
 
 
