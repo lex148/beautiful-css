@@ -163,6 +163,18 @@ CLEAN
   end
 
 
+  it 'should work with base64 encoded images 2' do
+    dirty = <<DIRTY
+body
+{background-image:url( "data:image/png;base64,%2F9j%2F4AAQSkZJR8QDn9Ltz%2F%2F2Q%3D%3D"); }
+DIRTY
+    clean = <<CLEAN
+body
+{ background-image:url("data:image/png;base64,%2F9j%2F4AAQSkZJR8QDn9Ltz%2F%2F2Q%3D%3D") }
+CLEAN
+    assert_renders dirty, clean
+  end
+
 
 
 

@@ -5,9 +5,7 @@ module BeautifulCss
 
     def initialize(str)
       @body = str
-      @body = @body.gsub( /url\( *data:/ , '__url_data__')
       @body = @body.gsub( /;base64,/ , '__base64__')
-      @body = @body.gsub( /progid:/ , '__progid__')
     end
 
     def selectors
@@ -17,16 +15,17 @@ module BeautifulCss
     def props
       begin
       p = @body.match(/\{([^}]*)/)[1].split(';').select{|s| !s.strip.empty? }
-      p.map{|s| s.strip.split(':') }
+      p.map do |s|
+        first, *rest = s.strip.split(':')
+        rest.class == Array ? [first, rest.join(':') ] : [first, rest ]
+      end
       rescue
         []
       end
     end
 
     def restore_special_strings str
-      str = str.gsub( /__url_data__/, 'url(data:')
       str = str.gsub( /__base64__/, ';base64,')
-      str = str.gsub( /__progid__/, 'progid:')
       str
     end
 
