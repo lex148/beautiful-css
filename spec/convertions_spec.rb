@@ -183,6 +183,20 @@ CLEAN
 
 
 
+  it 'should remove unneeded styles' do
+    dirty = <<DIRTY
+td { color: green; }
+.unneeded_class { td{ color:green; } }
+DIRTY
+    clean = <<CLEAN
+td
+{ color:green }
+CLEAN
+    assert_renders dirty, clean
+  end
+
+
+
 
 
 
