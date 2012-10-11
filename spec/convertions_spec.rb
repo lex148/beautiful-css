@@ -183,18 +183,32 @@ CLEAN
 
 
 
-  it 'should remove unneeded styles' do
+#  it 'should remove unneeded styles' do
+#    dirty = <<DIRTY
+#td { color: green; }
+#.unneeded_class { td{ color:green; } }
+#DIRTY
+#    clean = <<CLEAN
+#td
+#{ color:green }
+#CLEAN
+#    assert_renders dirty, clean
+#  end
+
+
+
+
+  it 'should handle IE filter tags' do
     dirty = <<DIRTY
-td { color: green; }
-.unneeded_class { td{ color:green; } }
+a
+{ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0b7a1', endColorstr='#bf6e4e',GradientType=0 ); }
 DIRTY
     clean = <<CLEAN
-td
-{ color:green }
+a
+{ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0b7a1', endColorstr='#bf6e4e',GradientType=0 ) }
 CLEAN
     assert_renders dirty, clean
   end
-
 
 
 

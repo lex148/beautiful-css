@@ -7,6 +7,7 @@ module BeautifulCss
       @body = str
       @body = @body.gsub( /url\( *data:/ , '__url_data__')
       @body = @body.gsub( /;base64,/ , '__base64__')
+      @body = @body.gsub( /progid:/ , '__progid__')
     end
 
     def selectors
@@ -25,6 +26,7 @@ module BeautifulCss
     def restore_special_strings str
       str = str.gsub( /__url_data__/, 'url(data:')
       str = str.gsub( /__base64__/, ';base64,')
+      str = str.gsub( /__progid__/, 'progid:')
       str
     end
 
