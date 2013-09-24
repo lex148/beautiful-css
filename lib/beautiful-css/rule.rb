@@ -9,11 +9,10 @@ module BeautifulCss
 
     def cleaner sel
       sel.to_s.split(' ').map do |part|
-        if part =~ /^[^\.^#]/
-          part.downcase
-        else
-          part
-        end
+        #only tags are case insensitive
+        tag = part.split(/\.|#/)[0]
+        to_replace = Regexp.new("^"+ tag)
+        part.gsub to_replace, tag.downcase
       end.join(' ')
     end
 

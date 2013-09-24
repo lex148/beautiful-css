@@ -223,6 +223,19 @@ CLEAN
   end
 
 
+it 'only tags should be case insinsitive' do
+    dirty = <<DIRTY
+A.Test
+{ prop: value; }
+DIRTY
+    clean = <<CLEAN
+a.Test
+{ prop:value }
+CLEAN
+    assert_renders dirty, clean
+  end
+
+
 
 
 
